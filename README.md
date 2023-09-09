@@ -41,7 +41,7 @@ int main() {
 
     // glfw window creation
     // --------------------
-    GLFWwindow* window = glfwCreateWindow(800, 500, "LearnOpenGL", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(800, 500, "ZeroEngine", NULL, NULL);
     if (window == NULL)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -116,3 +116,5 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
     glViewport(0, 0, width, height);
 }
 ```
+In the code above we have initialized the game engine and made a simple execution loop. After running it, a black window appears and writes the FPS in the window title<br />
+Let's add some graphics to it. Currently the engine comes with a simple render pipeline which is called "OrthoRP". OrthoRP has been designed exclusively for 2D graphics.
