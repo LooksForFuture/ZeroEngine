@@ -1,5 +1,4 @@
 #pragma once
-#include <unordered_map>
 #include <string>
 #include <iostream>
 
@@ -9,8 +8,6 @@ class Shader {
 	unsigned int ID;
 	unsigned int attribsCount;
 	unsigned int uniformsCount;
-
-	std::unordered_map<std::string, int> uniforms;
 
     void checkCompileErrors(unsigned int shader, std::string type)
     {
