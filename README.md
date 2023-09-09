@@ -137,6 +137,7 @@ In the code above we have initialized the game engine and made a simple executio
 /* rest of the code */
 ```
 As you see we have added an entity called "e1" and attached the "Camera" component to it. The "Camera" component is an essential part and without it, nothing would be drawn on screen. And we have added a "RenderSprite" component to "e2" entity. The RenderSprite component handles the way the entity is drawn on screen. Now if run the code, you should see a green background and a white square at the center of screen.<br /><br />
+<img src="screenshots/shot-1.png" /><br /><br />
 Now let's transform "e2" and add a sprite to it.
 ```cpp
 Entity* e2 = gameEngine.createEntity();
