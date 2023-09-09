@@ -21,7 +21,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <Zero/stb_image.h>
 
-#include <Zero/Rtti.hh>
+#include <Zero/Rtti.h>
 
 class Engine;
 class Entity;
