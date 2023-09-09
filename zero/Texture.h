@@ -1,5 +1,3 @@
-#include <glad/glad.h>
-
 class Texture2D {
     bool created = false;
 
