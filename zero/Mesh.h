@@ -5,13 +5,6 @@
 #include <glad/glad.h>
 
 #include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-
-#define Mat4 glm::mat4
-#define Vec2 glm::vec2
-#define Vec3 glm::vec3
-#define Vec4 glm::vec4
 
 struct Vertex {
     glm::vec3 position;
