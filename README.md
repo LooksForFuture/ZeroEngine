@@ -5,10 +5,10 @@ Special thanks to @royvandam for his <a href="https://github.com/royvandam/rtti"
 
 ## Structure
 The engine class controls all entities and their components. And the pipelines manage extra functionality such as rendering, audio, physics and etc.<br />
-Currently only render and physics pipelines have been implemented.
+Only render and physics pipelines currently have been implemented.
 
 ## Quickstart
-I currently use GLAD for loading opengl and GLFW for window management in my examples. But the engine doesn't strictly require them and you can use any other library you want.
+I currently use GLAD for loading opengl and GLFW for window management in my examples. But the engine doesn't strictly require them and you can use any other library you prefer.
 ```cpp
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
