@@ -146,3 +146,41 @@ e2->transform->setPosition(Vec3(1.5f, 1.5f, 0.0f));
 rs->sprite = gameEngine.loadTexture("sprite.png");
 ```
 In the code above we have moved the entity and add a sprite to it. The sprite has been loaded with "loadTexture" function which takes care of garbage colleciton of textures.
+
+## Physics
+Zero comes with a premade box2d physics pipeline, too.
+```cpp
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+
+#include <Zero/engine.h>
+#include <Zero/OrthoRP.h>
+#include <Zero/BoxPhysics.h>
+
+/* the code */
+
+    stbi_set_flip_vertically_on_load(true); // tell stb image to load textures normally
+    gameEngine.init(); // init the game engine
+    gameEngine.setRenderPipeline(new OrthoRP());
+    gameEngine.setPhysicsPipeline(new Box2DPhysics());
+
+    Entity* e1 = gameEngine.createEntity();
+    Camera* cam = e1->addComponent<Camera>();
+    cam->background = Vec3(0.2f, 0.8f, 0.3f);
+
+    Entity* ground = gameEngine.createEntity();
+    ground->transform->setPosition(Vec3(0.0f, -2.0f, 0.0f));
+    ground->transform->setScale(Vec3(5.0f, 0.5f, 1.0f));
+    ground->transform->setRotation(Vec3(0.0f, 0.0f, 4.0f));
+    ground->addComponent<RenderSprite>();
+    ground->addComponent<BoxCollider>(b2_staticBody);
+
+    Entity* bird = gameEngine.createEntity();
+    bird->transform->setPosition(Vec3(0.0f, 0.0f, 0.0f));
+    RenderSprite* rs = bird->addComponent<RenderSprite>();
+    rs->sprite = gameEngine.loadTexture("bird.png");
+    bird->addComponent<CircleCollider>(b2_dynamicBody);
+
+/* rest of the code */
+```
+<br /><img src="screenshots/shot-2.png" /><br />
