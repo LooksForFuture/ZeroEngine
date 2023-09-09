@@ -3,6 +3,14 @@ Zero is a game engine/framework written for c++ with simplicity and functionalit
 Zero has been designed to be both user friendly and configurable. The only hard requirements are C++ 17, opengl 3.3 or later and glm.<br /><br />
 Special thanks to @royvandam for his <a href="https://github.com/royvandam/rtti">rtti</a> library.
 
+## Features
+<ul>
+    <li>Simple</li>
+    <li>User-friendly</li>
+    <li>Takes care of pointer management</li>
+    <li>Totally configurable</li>
+</ul>
+
 ## Structure
 The engine class controls all entities and their components. And the pipelines manage extra functionality such as rendering, audio, physics and etc.<br />
 Only render and physics pipelines currently have been implemented.
@@ -183,4 +191,8 @@ Zero comes with a premade box2d physics pipeline, too.
 
 /* rest of the code */
 ```
-<br /><img src="screenshots/shot-2.png" /><br />
+<br /><img src="screenshots/shot-2.png" /><br /><br />
+As you see the bird drops on the box and rolls down
+
+## More Examples
+I will try to make some examples with Zero and upload them soon.
