@@ -9,7 +9,7 @@ Currently only render and physics pipeline have been implemented.
 
 ## Quickstart
 I currently use GLAD for loading opengl and GLFW for window management in my examples. But the engine doesn't strictly require them and you can use any other library you want.
-```python
+```cpp
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -62,7 +62,115 @@ int main() {
     stbi_set_flip_vertically_on_load(true); // tell stb image to load textures normally
     gameEngine.init(); // init the game engine
 
+    glViewport(0, 0, 800, 500);
+
+    double previousTime = glfwGetTime();
+    double previous = previousTime;
+    double lag = 0.0f;
+    int frameCount = 0;
+    while (!glfwWindowShouldClose(window)) {
+        // Measure speed
+        double currentTime = glfwGetTime();
+        frameCount++;
+        // If a second has passed.
+        if (currentTime - previousTime >= 1.0)
+        {
+            // Display the frame count here any way you want.
+            glfwSetWindowTitle(window, ("FPS: " + std::to_string(frameCount)).c_str());
+
+            frameCount = 0;
+            previousTime = currentTime;
+        }
+
+        Time::unscaledDt = (currentTime - previous);
+        Time::dt = Time::scale * Time::unscaledDt;
+
+        lag += Time::dt;
+        // fixed update
+        while (lag >= Time::fixedDt) {
+            gameEngine.fixedUpdate();
+            gameEngine.stepPhysics(Time::fixedDt);
+            lag -= Time::fixedDt;
+        }
+
+        gameEngine.update();
+        gameEngine.lateUpdate();
+        gameEngine.clear();
+
+        gameEngine.render();
+
+        glfwSwapBuffers(window);
+        glfwPollEvents();
+
+        previous = currentTime;
+    }
+
+    glfwTerminate();
+    return 0;
+}
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
+    glViewport(0, 0, width, height);
+}
+```
+In the code above we have initialized the game engine and made a simple execution loop. After running it, a black window appears and writes the FPS in the window title. Let's add some graphics to it. Currently the engine comes with a simple render pipeline which is called "OrthoRP". OrthoRP has been designed exclusively for 2D graphics. To make it work we need to add "#include <Zero/OrthoRP.h>" after "#include <Zero/engine.h>". Now let's add an entity.
+```cpp
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+
+#include <Zero/engine.h>
+#include <Zero/OrthoRP.h>
+
+Engine gameEngine;
+
+namespace Time {
+    double scale = 1.0;
+    double unscaledDt = 0.0;
+    double dt = 0.0;
+    double fixedDt = 1.0 / 120.0;
+}
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+
+int main() {
+
+    // glfw: initialize and configure
+    // ------------------------------
+    glfwInit();
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+#ifdef __APPLE__
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+#endif
+
+    // glfw window creation
+    // --------------------
+    GLFWwindow* window = glfwCreateWindow(800, 500, "ZeroEngine", NULL, NULL);
+    if (window == NULL)
+    {
+        std::cout << "Failed to create GLFW window" << std::endl;
+        glfwTerminate();
+        return -1;
+    }
+    glfwMakeContextCurrent(window);
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+
+    // glad: load all OpenGL function pointers
+    // ---------------------------------------
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    {
+        std::cout << "Failed to initialize GLAD" << std::endl;
+        return -1;
+    }
+
+    stbi_set_flip_vertically_on_load(true); // tell stb image to load textures normally
+    gameEngine.init(); // init the game engine
+    gameEngine.setRenderPipeline(new OrthoRP());
+
     Entity* e = gameEngine.createEntity();
+    RenderSprite* rs = e->addComponent<RenderSprite>();
 
     glViewport(0, 0, 800, 500);
 
@@ -96,7 +204,6 @@ int main() {
         }
 
         gameEngine.update();
-
         gameEngine.lateUpdate();
         gameEngine.clear();
 
@@ -116,5 +223,3 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
     glViewport(0, 0, width, height);
 }
 ```
-In the code above we have initialized the game engine and made a simple execution loop. After running it, a black window appears and writes the FPS in the window title<br />
-Let's add some graphics to it. Currently the engine comes with a simple render pipeline which is called "OrthoRP". OrthoRP has been designed exclusively for 2D graphics.
