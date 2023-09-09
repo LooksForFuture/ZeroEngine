@@ -2,8 +2,6 @@
 #include <string>
 #include <iostream>
 
-#include <glad/glad.h>
-
 class Shader {
 	unsigned int ID;
 	unsigned int attribsCount;
