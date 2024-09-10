@@ -5,9 +5,6 @@
 #include <ZEngine/ZAsset.hpp>
 #include <ZEngine/ZEngine.hpp>
 
-//#define STB_IMAGE_IMPLEMENTATION
-//#include <ZEngine/stb_image.h>
-
 #include <SDL_image.h> //texture loading utilities
 
 class ZTexture : public ZAsset {
