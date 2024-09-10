@@ -9,3 +9,6 @@ I will complete the readme later. I'm really really, really... busy. Busier than
 There are so many projects that I'm working on at the same time, so it makes me some time to write a good readme.<br />
 But, the most important thing that I can tell is that I had a massive progress in developing my own game engine.<br />
 I learned so many things and this repo can be a very good learning resource for anyone interested.
+
+##A simple screenshot of the flappy bird I made
+<img src="./screenshots/bird.png"></img>
