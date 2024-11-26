@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(ZeroEngine VERSION 0.0.1
+project(ZEngine VERSION 0.0.1
     LANGUAGES CXX
 )
 
@@ -13,7 +13,10 @@ add_library(${PROJECT_NAME} STATIC)
 
 target_sources(${PROJECT_NAME}
     PRIVATE
-    src/Core/ZApp.cpp
+    src/ZCore/ZApp.cpp
+
+    src/ZCore/ZEngine.cpp
+    src/ZCore/ZEntity.cpp
 )
 
 target_include_directories(${PROJECT_NAME}
@@ -45,7 +48,14 @@ else()
 endif()
 
 set(public_headers
-    Core/ZApp.hpp
+    #foundations of the framework
+    ZCore/Rtti.hpp
+    ZCore/GCObject.hpp
+    ZCore/ZApp.hpp
+    
+    #game engine foundation
+    ZCore/ZEngine.hpp
+    ZCore/ZEntity.hpp
 )
 
 foreach(header ${public_headers})

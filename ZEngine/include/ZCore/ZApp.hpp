@@ -2,6 +2,7 @@
 #define ZAPP_H
 
 class ZApp {
+protected:
     static bool constructed;
 };
 

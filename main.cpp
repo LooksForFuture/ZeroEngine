@@ -1,7 +1,9 @@
 #include <iostream>
-#include <Core/ZApp.hpp>
+#include <ZCore/ZEngine.hpp>
 
 int main(int argc, char** argv) {
-    ZApp app;
+    ZEngine app("Scorpio");
+    Entity ent1 = Entity::spawn();
+    Entity ent2 = Entity::spawn();
     return 0;
 }
